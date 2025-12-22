@@ -23,43 +23,45 @@ const ResultCard = ({
   totalProfit,
 }: ResultCardProps) => {
   const { t } = useLanguage();
-  const profitClass = totalProfit > 0 ? 'text-green-600' : totalProfit < 0 ? 'text-red-600' : 'text-gray-900';
+  const isGain = totalProfit > 0;
+  const isLoss = totalProfit < 0;
+  const profitClass = isGain ? 'text-green-600' : isLoss ? 'text-red-600' : 'text-gray-900';
+  const statusLabel = isGain ? t('common.you_gain') : isLoss ? t('common.you_lose') : t('common.break_even');
 
   return (
-    <div className="w-full rounded-xl bg-white p-5 shadow-sm">
-      <h2 className="mb-4 text-lg font-semibold text-gray-800">{t('common.result')}</h2>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.quantity')}</p>
-          <p className="text-xl font-semibold text-gray-900">{formatNumber(quantityXi)} xi</p>
+    <div className="w-full rounded-2xl bg-white p-5 shadow-sm">
+      <div className="space-y-4">
+        <div className="space-y-2 text-center">
+          <p className="text-sm font-medium text-gray-600">{statusLabel}</p>
+          <p className={`text-5xl font-bold ${profitClass}`}>${formatNumber(totalProfit)}</p>
         </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.buy_price')} (USD/xi)</p>
-          <p className="text-xl font-semibold text-gray-900">${formatNumber(buyXi)}</p>
+
+        <div className="space-y-1 rounded-xl bg-gray-50 p-4 text-center text-gray-800">
+          <p className="text-base font-semibold">
+            {t('common.you_paid')}: ${formatNumber(totalBuyValue)}
+          </p>
+          <p className="text-base font-semibold">
+            {t('common.current_value')}: ${formatNumber(totalCurrentValue)}
+          </p>
         </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.current_price')} (USD/xi)</p>
-          <p className="text-xl font-semibold text-gray-900">${formatNumber(currentXi)}</p>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.profit_per_xi')} (USD)</p>
-          <p className="text-xl font-semibold text-gray-900">${formatNumber(profitPerXi)}</p>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.roi')} (%)</p>
-          <p className="text-xl font-semibold text-gray-900">{formatNumber(roiPercentage)}%</p>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.total_buy_value')} (USD)</p>
-          <p className="text-xl font-semibold text-gray-900">${formatNumber(totalBuyValue)}</p>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.total_current_value')} (USD)</p>
-          <p className="text-xl font-semibold text-gray-900">${formatNumber(totalCurrentValue)}</p>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-4">
-          <p className="text-sm text-gray-500">{t('common.total_profit')} (USD)</p>
-          <p className={`text-xl font-semibold ${profitClass}`}>${formatNumber(totalProfit)}</p>
+
+        <div className="space-y-2 rounded-xl bg-gray-50 p-4 text-gray-700">
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-gray-600">{t('common.quantity')}</span>
+            <span className="font-semibold text-gray-900">{formatNumber(quantityXi)} xi</span>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-gray-600">{t('common.roi')}</span>
+            <span className="font-semibold text-gray-900">{formatNumber(roiPercentage)}%</span>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-gray-600">{t('common.price_now')}</span>
+            <span className="font-semibold text-gray-900">${formatNumber(currentXi)} / xi</span>
+          </div>
+          <div className="flex items-center justify-between text-sm text-gray-600">
+            <span>{t('common.profit_per_xi')}</span>
+            <span className="font-semibold text-gray-900">${formatNumber(profitPerXi)}</span>
+          </div>
         </div>
       </div>
     </div>

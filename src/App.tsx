@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import PriceInput from './components/PriceInput';
 import QuantityInput from './components/QuantityInput';
 import ResultCard from './components/ResultCard';
@@ -28,13 +28,7 @@ const App = () => {
     return hasValidBuy && hasValidCurrent && hasValidQuantity;
   }, [parsedBuyPrice, parsedCurrentPrice, parsedQuantity]);
 
-  useEffect(() => {
-    if (!isInputValid) {
-      setResult(null);
-    }
-  }, [isInputValid]);
-
-  const handleCalculate = () => {
+  const runCalculation = useCallback(() => {
     if (!isInputValid) {
       setResult(null);
       return;
@@ -49,16 +43,28 @@ const App = () => {
       quantityUnit,
     );
     setResult(calculation);
-  };
+  }, [
+    buyUnit,
+    currentUnit,
+    isInputValid,
+    parsedBuyPrice,
+    parsedCurrentPrice,
+    parsedQuantity,
+    quantityUnit,
+  ]);
+
+  useEffect(() => {
+    runCalculation();
+  }, [runCalculation]);
 
   return (
-    <div className="min-h-screen px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl space-y-6">
-        <header className="space-y-4 text-center">
-          <div className="flex items-center justify-center gap-3">
-            <p className="text-sm font-semibold uppercase tracking-wide text-amber-700">Cambodia</p>
-            <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-white px-3 py-1 text-sm font-medium text-gray-800 shadow-sm">
-              <span className="text-amber-700">{t('common.language')}:</span>
+    <div className="min-h-screen bg-amber-50 px-4 py-8">
+      <div className="mx-auto max-w-lg space-y-6">
+        <header className="space-y-3 text-center">
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-amber-800">Cambodia</p>
+            <div className="flex items-center gap-1 rounded-full border border-amber-200 bg-white px-3 py-1 text-xs font-medium text-gray-800">
+              <span className="text-amber-700">{t('common.language')}</span>
               <div className="flex gap-1">
                 {(
                   [
@@ -71,8 +77,10 @@ const App = () => {
                     key={option.code}
                     type="button"
                     onClick={() => setLanguage(option.code)}
-                    className={`rounded px-2 py-1 transition ${
-                      language === option.code ? 'bg-amber-600 text-white' : 'text-gray-700 hover:bg-amber-100'
+                    className={`rounded-full px-2 py-1 transition ${
+                      language === option.code
+                        ? 'bg-amber-600 text-white'
+                        : 'text-gray-700 hover:bg-amber-100'
                     }`}
                   >
                     {option.label}
@@ -82,12 +90,10 @@ const App = () => {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-gray-900">{t('common.app_title')}</h1>
-          <p className="text-base text-gray-600">
-            {t('common.buy_price')} / {t('common.current_price')} ({t('common.unit_xi')}, {t('common.unit_domlang')}, {t('common.unit_ounce')})
-          </p>
+          <p className="text-sm text-gray-700">{t('common.tagline')}</p>
         </header>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="space-y-3">
           <PriceInput
             title={t('common.buy_price')}
             value={buyPrice}
@@ -111,12 +117,18 @@ const App = () => {
           />
         </div>
 
-        <div className="flex justify-center">
+        <div className="rounded-2xl bg-white p-4 shadow-sm">
+          <div className="flex items-center justify-between text-sm text-gray-600">
+            <span>{t('common.calculate')}</span>
+            <span className={isInputValid ? 'text-green-700' : 'text-gray-400'}>{
+              isInputValid ? t('common.auto_update') : t('common.fill_all')
+            }</span>
+          </div>
           <button
             type="button"
-            onClick={handleCalculate}
             disabled={!isInputValid}
-            className="w-full rounded-lg bg-amber-600 px-4 py-3 text-base font-semibold text-white shadow transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:bg-amber-300 sm:w-auto"
+            className="mt-3 w-full rounded-xl bg-amber-700 px-4 py-3 text-base font-semibold text-white transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:bg-amber-300"
+            onClick={runCalculation}
           >
             {t('common.calculate')}
           </button>
@@ -134,7 +146,7 @@ const App = () => {
             totalProfit={result.totalProfit}
           />
         ) : (
-          <div className="w-full rounded-xl border border-dashed border-amber-200 bg-white/60 p-5 text-center text-sm text-gray-600">
+          <div className="w-full rounded-2xl border border-dashed border-amber-200 bg-white p-5 text-center text-sm text-gray-700">
             {t('common.empty_state')}
           </div>
         )}
