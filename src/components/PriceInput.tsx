@@ -32,7 +32,7 @@ const PriceInput = ({ title, value, unit, onValueChange, onUnitChange }: PriceIn
   return (
     <div className="w-full rounded-xl bg-gray-50 px-4 py-4 ring-1 ring-gray-200">
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">{title}</p>
+        <p className="text-[11px] font-semibold uppercase text-gray-500">{title}</p>
         <span className="rounded-md border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600">{t('common.per_unit')}</span>
       </div>
       <div className="space-y-3">
