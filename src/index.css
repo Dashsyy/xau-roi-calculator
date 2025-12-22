@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: 'Inter', 'SF Pro Display', 'SF Pro Text', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  background-color: #f8f7f4;
+}
+
 body {
-  @apply bg-gray-100 text-gray-900 antialiased;
+  @apply bg-[#f8f7f4] text-gray-900 antialiased;
 }
 
 input:focus,

@@ -2,6 +2,8 @@ export type SupportedLanguage = 'en' | 'km' | 'zh';
 
 export type TranslationKey =
   | 'common.app_title'
+  | 'common.app_label'
+  | 'common.short_description'
   | 'common.buy_price'
   | 'common.current_price'
   | 'common.calculate'
@@ -26,11 +28,18 @@ export type TranslationKey =
   | 'common.break_even'
   | 'common.you_paid'
   | 'common.current_value'
-  | 'common.price_now';
+  | 'common.price_now'
+  | 'common.ready_hint'
+  | 'common.input_helper'
+  | 'common.primary_cta'
+  | 'common.new_calculation'
+  | 'common.total_value_title';
 
 export const translations: Record<SupportedLanguage, Record<TranslationKey, string>> = {
   en: {
     'common.app_title': 'Gold ROI Calculator',
+    'common.app_label': 'Calculator',
+    'common.short_description': 'Quickly see how your gold is doing at today\'s prices.',
     'common.buy_price': 'Buy Price',
     'common.current_price': 'Current Price',
     'common.calculate': 'Calculate',
@@ -56,9 +65,16 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.you_paid': 'You paid',
     'common.current_value': 'Current value',
     'common.price_now': 'Price now',
+    'common.ready_hint': 'Updates as you type. Tap calculate if needed.',
+    'common.input_helper': 'Enter your gold values below',
+    'common.primary_cta': 'Calculate now',
+    'common.new_calculation': 'New calculation',
+    'common.total_value_title': 'Total value',
   },
   km: {
     'common.app_title': 'គណនាផលចំណេញមាស',
+    'common.app_label': 'កម្មវិធីគណនា',
+    'common.short_description': 'មើលតម្លៃមាសរបស់អ្នកយ៉ាងឆាប់រហ័សតាមតម្លៃថ្ងៃនេះ។',
     'common.buy_price': 'តម្លៃទិញ',
     'common.current_price': 'តម្លៃបច្ចុប្បន្ន',
     'common.calculate': 'គណនា',
@@ -84,9 +100,16 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.you_paid': 'តម្លៃបានបង់',
     'common.current_value': 'តម្លៃបច្ចុប្បន្ន',
     'common.price_now': 'តម្លៃឥឡូវ',
+    'common.ready_hint': 'គណនាដោយស្វ័យប្រវត្តិ ពេលបញ្ចូល',
+    'common.input_helper': 'បញ្ចូលតម្លៃមាសរបស់អ្នក',
+    'common.primary_cta': 'គណនាឥឡូវ',
+    'common.new_calculation': 'គណនាថ្មី',
+    'common.total_value_title': 'តម្លៃសរុប',
   },
   zh: {
     'common.app_title': '黄金投资回报计算器',
+    'common.app_label': '计算器',
+    'common.short_description': '按今日金价快速查看你的收益。',
     'common.buy_price': '买入价格',
     'common.current_price': '当前价格',
     'common.calculate': '计算',
@@ -112,5 +135,10 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.you_paid': '已支付',
     'common.current_value': '当前价值',
     'common.price_now': '现价',
+    'common.ready_hint': '输入即计算，如需可再点计算',
+    'common.input_helper': '输入你的黄金数值',
+    'common.primary_cta': '立即计算',
+    'common.new_calculation': '重新计算',
+    'common.total_value_title': '总价值',
   },
 };

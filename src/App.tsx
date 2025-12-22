@@ -57,99 +57,108 @@ const App = () => {
     runCalculation();
   }, [runCalculation]);
 
+  const handleLanguageChange = (next: 'en' | 'km' | 'zh') => setLanguage(next);
+
   return (
-    <div className="min-h-screen bg-amber-50 px-4 py-8">
-      <div className="mx-auto max-w-lg space-y-6">
-        <header className="space-y-3 text-center">
-          <div className="flex items-center justify-center gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-amber-800">Cambodia</p>
-            <div className="flex items-center gap-1 rounded-full border border-amber-200 bg-white px-3 py-1 text-xs font-medium text-gray-800">
-              <span className="text-amber-700">{t('common.language')}</span>
-              <div className="flex gap-1">
-                {(
-                  [
-                    { code: 'en' as const, label: 'EN' },
-                    { code: 'km' as const, label: 'KM' },
-                    { code: 'zh' as const, label: '中文' },
-                  ]
-                ).map((option) => (
-                  <button
-                    key={option.code}
-                    type="button"
-                    onClick={() => setLanguage(option.code)}
-                    className={`rounded-full px-2 py-1 transition ${
-                      language === option.code
-                        ? 'bg-amber-600 text-white'
-                        : 'text-gray-700 hover:bg-amber-100'
-                    }`}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
+    <div className="min-h-screen bg-[#f8f7f4] text-gray-900">
+      <div className="mx-auto flex min-h-screen max-w-xl flex-col px-5 pb-28 pt-8">
+        <header className="space-y-4">
+          <div className="flex items-start justify-between gap-3">
+            <div className="space-y-1">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700">
+                {t('common.app_label')}
+              </p>
+              <h1 className="text-3xl font-black leading-tight text-gray-900">{t('common.app_title')}</h1>
+              <p className="text-sm font-medium text-gray-600">{t('common.short_description')}</p>
+            </div>
+            <div className="flex shrink-0 items-center gap-2 rounded-full bg-white/80 p-1 shadow-sm ring-1 ring-gray-100">
+              {[{ code: 'en' as const, label: 'EN' }, { code: 'km' as const, label: 'KM' }, { code: 'zh' as const, label: '中文' }].map(
+                (option) => {
+                  const isActive = language === option.code;
+                  return (
+                    <button
+                      key={option.code}
+                      type="button"
+                      onClick={() => handleLanguageChange(option.code)}
+                      className={`min-h-[42px] min-w-[58px] rounded-full px-3 text-sm font-semibold transition ${
+                        isActive
+                          ? 'bg-amber-600 text-white shadow-sm'
+                          : 'text-gray-700 hover:bg-gray-50 active:scale-[0.99]'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                },
+              )}
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">{t('common.app_title')}</h1>
-          <p className="text-sm text-gray-700">{t('common.tagline')}</p>
+          <p className="text-sm font-semibold text-gray-700">{t('common.input_helper')}</p>
         </header>
 
-        <div className="space-y-3">
-          <PriceInput
-            title={t('common.buy_price')}
-            value={buyPrice}
-            unit={buyUnit}
-            onValueChange={setBuyPrice}
-            onUnitChange={setBuyUnit}
-          />
-          <PriceInput
-            title={t('common.current_price')}
-            value={currentPrice}
-            unit={currentUnit}
-            onValueChange={setCurrentPrice}
-            onUnitChange={setCurrentUnit}
-          />
-          <QuantityInput
-            title={t('common.quantity')}
-            value={quantity}
-            unit={quantityUnit}
-            onValueChange={setQuantity}
-            onUnitChange={setQuantityUnit}
-          />
-        </div>
+        <main className="mt-6 flex flex-1 flex-col gap-4">
+          <section className="space-y-3">
+            <PriceInput
+              title={t('common.buy_price')}
+              value={buyPrice}
+              unit={buyUnit}
+              onValueChange={setBuyPrice}
+              onUnitChange={setBuyUnit}
+            />
+            <PriceInput
+              title={t('common.current_price')}
+              value={currentPrice}
+              unit={currentUnit}
+              onValueChange={setCurrentPrice}
+              onUnitChange={setCurrentUnit}
+            />
+            <QuantityInput
+              title={t('common.quantity')}
+              value={quantity}
+              unit={quantityUnit}
+              onValueChange={setQuantity}
+              onUnitChange={setQuantityUnit}
+            />
+          </section>
 
-        <div className="rounded-2xl bg-white p-4 shadow-sm">
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <span>{t('common.calculate')}</span>
-            <span className={isInputValid ? 'text-green-700' : 'text-gray-400'}>{
-              isInputValid ? t('common.auto_update') : t('common.fill_all')
-            }</span>
+          <section>
+            {result ? (
+              <ResultCard
+                buyXi={result.buyXi}
+                currentXi={result.currentXi}
+                profitPerXi={result.profitPerXi}
+                roiPercentage={result.roiPercentage}
+                quantityXi={result.quantityXi}
+                totalBuyValue={result.totalBuyValue}
+                totalCurrentValue={result.totalCurrentValue}
+                totalProfit={result.totalProfit}
+              />
+            ) : (
+              <div className="flex w-full flex-col items-center justify-center rounded-3xl border border-white/40 bg-white/70 px-5 py-8 text-center shadow-sm">
+                <p className="text-lg font-semibold text-gray-800">{t('common.total_value_title')}</p>
+                <p className="mt-3 text-4xl font-black text-gray-500">$0.00</p>
+                <p className="mt-2 text-sm text-gray-600">{t('common.empty_state')}</p>
+              </div>
+            )}
+          </section>
+        </main>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/90 to-white/50 px-4 pb-5 pt-3 shadow-[0_-10px_30px_-24px_rgba(0,0,0,0.4)]">
+        <div className="mx-auto flex max-w-xl items-center justify-between gap-3 rounded-2xl bg-gray-900 px-4 py-3 text-white shadow-lg">
+          <div className="space-y-0.5">
+            <p className="text-xs uppercase tracking-[0.15em] text-amber-200/80">{t('common.calculate')}</p>
+            <p className="text-sm font-semibold text-white/80">{isInputValid ? t('common.auto_update') : t('common.fill_all')}</p>
           </div>
           <button
             type="button"
-            disabled={!isInputValid}
-            className="mt-3 w-full rounded-xl bg-amber-700 px-4 py-3 text-base font-semibold text-white transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:bg-amber-300"
             onClick={runCalculation}
+            disabled={!isInputValid}
+            className="min-h-[48px] rounded-xl bg-amber-500 px-4 text-base font-bold text-gray-900 transition hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 disabled:cursor-not-allowed disabled:bg-amber-200"
           >
-            {t('common.calculate')}
+            {t('common.primary_cta')}
           </button>
         </div>
-
-        {result ? (
-          <ResultCard
-            buyXi={result.buyXi}
-            currentXi={result.currentXi}
-            profitPerXi={result.profitPerXi}
-            roiPercentage={result.roiPercentage}
-            quantityXi={result.quantityXi}
-            totalBuyValue={result.totalBuyValue}
-            totalCurrentValue={result.totalCurrentValue}
-            totalProfit={result.totalProfit}
-          />
-        ) : (
-          <div className="w-full rounded-2xl border border-dashed border-amber-200 bg-white p-5 text-center text-sm text-gray-700">
-            {t('common.empty_state')}
-          </div>
-        )}
       </div>
     </div>
   );
