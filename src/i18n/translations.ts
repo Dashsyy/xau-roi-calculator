@@ -46,7 +46,8 @@ export type TranslationKey =
   | 'common.unit_domlang_short'
   | 'common.unit_ounce_short'
   | 'common.price_label'
-  | 'common.quantity_short';
+  | 'common.quantity_short'
+  | 'common.save_result';
 
 export const translations: Record<SupportedLanguage, Record<TranslationKey, string>> = {
   en: {
@@ -96,6 +97,7 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.unit_ounce_short': 'Ounce',
     'common.price_label': 'Price',
     'common.quantity_short': 'Qty',
+    'common.save_result': 'Save Result',
   },
   km: {
     'common.app_title': 'គណនាផលចំណេញមាស',
@@ -144,6 +146,7 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.unit_ounce_short': 'អោន',
     'common.price_label': 'តម្លៃ',
     'common.quantity_short': 'បរិ.',
+    'common.save_result': 'រក្សាទុកលទ្ធផល',
   },
   zh: {
     'common.app_title': '黄金投资回报计算器',
@@ -192,5 +195,6 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.unit_ounce_short': '盎司',
     'common.price_label': '价格',
     'common.quantity_short': '数量',
+    'common.save_result': '保存结果',
   },
 };
