@@ -25,42 +25,48 @@ const ResultCard = ({
   const { t } = useLanguage();
   const isGain = totalProfit > 0;
   const isLoss = totalProfit < 0;
-  const profitClass = isGain ? 'text-emerald-600' : isLoss ? 'text-red-600' : 'text-gray-900';
   const statusLabel = isGain ? t('common.you_gain') : isLoss ? t('common.you_lose') : t('common.break_even');
+  const heroColor = isGain ? 'text-emerald-600' : isLoss ? 'text-red-600' : 'text-gray-900';
 
   return (
-    <div className="w-full rounded-3xl border border-white/70 bg-white/95 p-6 shadow-sm backdrop-blur">
+    <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
       <div className="space-y-6">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gray-500">{statusLabel}</p>
-          <p className={`mt-2 text-6xl font-black tracking-tight ${profitClass}`}>${formatNumber(totalProfit)}</p>
+          <p className={`text-base font-semibold capitalize ${heroColor}`}>{statusLabel}</p>
+          <p className={`mt-1 text-5xl font-extrabold tracking-tight ${heroColor}`}>${formatNumber(totalProfit)}</p>
         </div>
 
-        <div className="space-y-3 rounded-2xl bg-gray-50 px-5 py-4 text-gray-900 shadow-inner">
-          <div className="flex items-center justify-between text-lg font-semibold">
-            <span>{t('common.you_paid')}</span>
-            <span>${formatNumber(totalBuyValue)}</span>
+        <div className="flex items-center justify-between gap-4 text-gray-900">
+          <div className="flex-1 rounded-2xl bg-gray-50 px-4 py-3 text-left">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">{t('common.current_value')}</p>
+            <p className="mt-1 text-2xl font-bold">${formatNumber(totalCurrentValue)}</p>
           </div>
-          <div className="flex items-center justify-between text-lg font-semibold">
-            <span>{t('common.current_value')}</span>
-            <span>${formatNumber(totalCurrentValue)}</span>
+          <div className="flex-1 rounded-2xl bg-gray-50 px-4 py-3 text-left">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">{t('common.you_paid')}</p>
+            <p className="mt-1 text-2xl font-bold">${formatNumber(totalBuyValue)}</p>
           </div>
         </div>
 
-        <div className="space-y-3 rounded-2xl bg-white px-5 py-4 shadow-inner ring-1 ring-gray-100">
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <span className="font-semibold text-gray-700">{t('common.roi')}</span>
-            <span className="text-base font-bold text-gray-900">{formatNumber(roiPercentage)}%</span>
+        <div className="flex items-center justify-between gap-2 rounded-2xl bg-gray-900/5 px-4 py-3 text-sm font-semibold text-gray-700">
+          <div className="flex items-center gap-1">
+            <span className="text-gray-500">{t('common.roi')}</span>
+            <span className={isGain ? 'text-emerald-600' : isLoss ? 'text-red-600' : 'text-gray-900'}>
+              {isGain ? '+' : ''}
+              {formatNumber(roiPercentage)}%
+            </span>
           </div>
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <span className="font-semibold text-gray-700">{t('common.price_now')}</span>
-            <span className="text-base font-bold text-gray-900">${formatNumber(currentXi)} / xi</span>
+          <div className="flex items-center gap-1">
+            <span className="text-gray-500">{t('common.quantity_short')}</span>
+            <span className="text-gray-900">{formatNumber(quantityXi)} {t('common.unit_xi_short')}</span>
           </div>
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <span className="font-semibold text-gray-700">{t('common.quantity')}</span>
-            <span className="text-base font-bold text-gray-900">{formatNumber(quantityXi)} xi</span>
+          <div className="flex items-center gap-1">
+            <span className="text-gray-500">{t('common.price_label')}</span>
+            <span className="text-gray-900">${formatNumber(currentXi)} / {t('common.unit_xi_short')}</span>
           </div>
-          <div className="flex items-center justify-between text-xs text-gray-500">
+        </div>
+
+        <div className="rounded-2xl bg-gray-50 px-4 py-3 text-xs text-gray-500">
+          <div className="flex items-center justify-between">
             <span>{t('common.profit_per_xi')}</span>
             <span className="font-semibold text-gray-800">${formatNumber(profitPerXi)}</span>
           </div>

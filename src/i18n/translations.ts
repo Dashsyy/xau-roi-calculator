@@ -33,13 +33,26 @@ export type TranslationKey =
   | 'common.input_helper'
   | 'common.primary_cta'
   | 'common.new_calculation'
-  | 'common.total_value_title';
+  | 'common.total_value_title'
+  | 'common.currency_converter'
+  | 'common.buy_price_label'
+  | 'common.current_price_label'
+  | 'common.quantity_label'
+  | 'common.comparison_note'
+  | 'common.quantity_placeholder'
+  | 'common.amount_placeholder'
+  | 'common.per_unit'
+  | 'common.unit_xi_short'
+  | 'common.unit_domlang_short'
+  | 'common.unit_ounce_short'
+  | 'common.price_label'
+  | 'common.quantity_short';
 
 export const translations: Record<SupportedLanguage, Record<TranslationKey, string>> = {
   en: {
     'common.app_title': 'Gold ROI Calculator',
     'common.app_label': 'Calculator',
-    'common.short_description': 'Quickly see how your gold is doing at today\'s prices.',
+    'common.short_description': 'Quick snapshot of how your gold is doing today.',
     'common.buy_price': 'Buy Price',
     'common.current_price': 'Current Price',
     'common.calculate': 'Calculate',
@@ -70,6 +83,19 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.primary_cta': 'Calculate now',
     'common.new_calculation': 'New calculation',
     'common.total_value_title': 'Total value',
+    'common.currency_converter': 'Currency Converter',
+    'common.buy_price_label': 'Buy Price',
+    'common.current_price_label': 'Current Price',
+    'common.quantity_label': 'Quantity',
+    'common.comparison_note': 'Prices are compared using the same gold unit',
+    'common.quantity_placeholder': 'Enter quantity',
+    'common.amount_placeholder': 'Enter amount',
+    'common.per_unit': 'per unit',
+    'common.unit_xi_short': 'Xi',
+    'common.unit_domlang_short': 'Domlang',
+    'common.unit_ounce_short': 'Ounce',
+    'common.price_label': 'Price',
+    'common.quantity_short': 'Qty',
   },
   km: {
     'common.app_title': 'គណនាផលចំណេញមាស',
@@ -105,6 +131,19 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.primary_cta': 'គណនាឥឡូវ',
     'common.new_calculation': 'គណនាថ្មី',
     'common.total_value_title': 'តម្លៃសរុប',
+    'common.currency_converter': 'កម្មវិធីបម្លែងរូបិយប័ណ្ណ',
+    'common.buy_price_label': 'តម្លៃទិញ',
+    'common.current_price_label': 'តម្លៃបច្ចុប្បន្ន',
+    'common.quantity_label': 'បរិមាណ',
+    'common.comparison_note': 'តម្លៃទាំងអស់ត្រូវបានប្រៀបធៀបទៅកាន់ឯកតាមាសដូចគ្នា',
+    'common.quantity_placeholder': 'បញ្ចូលបរិមាណ',
+    'common.amount_placeholder': 'បញ្ចូលចំនួន',
+    'common.per_unit': 'ក្នុងមួយឯកតា',
+    'common.unit_xi_short': 'ជី',
+    'common.unit_domlang_short': 'ដំឡឹង',
+    'common.unit_ounce_short': 'អោន',
+    'common.price_label': 'តម្លៃ',
+    'common.quantity_short': 'បរិ.',
   },
   zh: {
     'common.app_title': '黄金投资回报计算器',
@@ -140,5 +179,18 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.primary_cta': '立即计算',
     'common.new_calculation': '重新计算',
     'common.total_value_title': '总价值',
+    'common.currency_converter': '货币换算器',
+    'common.buy_price_label': '买入价格',
+    'common.current_price_label': '当前价格',
+    'common.quantity_label': '数量',
+    'common.comparison_note': '价格将以同一黄金单位比较',
+    'common.quantity_placeholder': '输入数量',
+    'common.amount_placeholder': '输入金额',
+    'common.per_unit': '每单位',
+    'common.unit_xi_short': '希',
+    'common.unit_domlang_short': '东朗',
+    'common.unit_ounce_short': '盎司',
+    'common.price_label': '价格',
+    'common.quantity_short': '数量',
   },
 };
