@@ -5,11 +5,11 @@
 :root {
   font-family: 'Inter', 'SF Pro Display', 'SF Pro Text', system-ui, -apple-system, sans-serif;
   color: #0f172a;
-  background-color: #f8f7f4;
+  background-color: #f0f1f3;
 }
 
 body {
-  @apply bg-[#f8f7f4] text-gray-900 antialiased;
+  @apply bg-[#f0f1f3] text-gray-900 antialiased;
 }
 
 input:focus,
