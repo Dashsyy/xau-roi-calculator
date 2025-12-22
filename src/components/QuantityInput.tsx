@@ -29,7 +29,7 @@ const QuantityInput = ({ title, value, unit, onValueChange, onUnitChange }: Quan
   };
 
   return (
-    <div className="w-full rounded-3xl border border-white/60 bg-white/80 p-4 shadow-sm backdrop-blur">
+    <div className="w-full rounded-3xl border border-white/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-amber-700">{t('common.quantity')}</p>
@@ -45,7 +45,7 @@ const QuantityInput = ({ title, value, unit, onValueChange, onUnitChange }: Quan
           value={value}
           onChange={handleValueChange}
           placeholder={title}
-          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-4 text-3xl font-black text-gray-900 shadow-inner focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
+          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-4 text-3xl font-black text-gray-900 shadow-inner focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
         />
         <div className="flex gap-2 text-sm font-semibold text-gray-800">
           {units.map((option) => {
@@ -56,7 +56,7 @@ const QuantityInput = ({ title, value, unit, onValueChange, onUnitChange }: Quan
                 type="button"
                 className={`flex-1 rounded-2xl px-3 py-3 transition ${
                   isActive
-                    ? 'bg-amber-600 text-white shadow-sm'
+                    ? 'bg-gray-900 text-white shadow-sm'
                     : 'border border-gray-200 bg-white text-gray-800 hover:border-amber-200 active:scale-[0.99]'
                 }`}
                 onClick={() => handleUnitChange(option)}
