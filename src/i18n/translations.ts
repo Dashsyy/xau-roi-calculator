@@ -122,7 +122,7 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.auto_update': 'គណនាស្វ័យប្រវត្តិ',
     'common.fill_all': 'បំពេញទាំងអស់',
     'common.quantity_hint': 'ជី ឬ ដំឡឹង',
-    'common.you_gain': 'អ្នកឈ្នះ',
+    'common.you_gain': 'អ្នកចំណេញ',
     'common.you_lose': 'អ្នកខាត',
     'common.break_even': 'គ្មានចំណេញ ឬ ខាត',
     'common.you_paid': 'តម្លៃបានបង់',
