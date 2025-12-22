@@ -133,7 +133,7 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.you_gain': 'អ្នកចំណេញ',
     'common.you_lose': 'អ្នកខាត',
     'common.break_even': 'គ្មានចំណេញ ឬ ខាត',
-    'common.you_paid': 'តម្លៃបានបង់',
+    'common.you_paid': 'តម្លៃកាលទិញសរុប',
     'common.current_value': 'តម្លៃបច្ចុប្បន្ន',
     'common.price_now': 'តម្លៃឥឡូវ',
     'common.ready_hint': 'គណនាដោយស្វ័យប្រវត្តិ ពេលបញ្ចូល',
