@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import PriceInput from './components/PriceInput';
+import QuantityInput from './components/QuantityInput';
 import ResultCard from './components/ResultCard';
 import { useLanguage } from './i18n/LanguageContext';
-import { GoldUnit, calculateProfitAndRoi } from './utils/goldConversion';
+import { GoldUnit, QuantityUnit, calculateProfitAndRoi } from './utils/goldConversion';
 
 type CalculationResult = ReturnType<typeof calculateProfitAndRoi>;
 
@@ -12,16 +13,20 @@ const App = () => {
   const [buyUnit, setBuyUnit] = useState<GoldUnit>('xi');
   const [currentPrice, setCurrentPrice] = useState('');
   const [currentUnit, setCurrentUnit] = useState<GoldUnit>('xi');
+  const [quantity, setQuantity] = useState('');
+  const [quantityUnit, setQuantityUnit] = useState<QuantityUnit>('xi');
   const [result, setResult] = useState<CalculationResult | null>(null);
 
   const parsedBuyPrice = Number.parseFloat(buyPrice);
   const parsedCurrentPrice = Number.parseFloat(currentPrice);
+  const parsedQuantity = Number.parseFloat(quantity);
 
   const isInputValid = useMemo(() => {
     const hasValidBuy = Number.isFinite(parsedBuyPrice) && parsedBuyPrice > 0;
     const hasValidCurrent = Number.isFinite(parsedCurrentPrice) && parsedCurrentPrice > 0;
-    return hasValidBuy && hasValidCurrent;
-  }, [parsedBuyPrice, parsedCurrentPrice]);
+    const hasValidQuantity = Number.isFinite(parsedQuantity) && parsedQuantity > 0;
+    return hasValidBuy && hasValidCurrent && hasValidQuantity;
+  }, [parsedBuyPrice, parsedCurrentPrice, parsedQuantity]);
 
   useEffect(() => {
     if (!isInputValid) {
@@ -35,7 +40,14 @@ const App = () => {
       return;
     }
 
-    const calculation = calculateProfitAndRoi(parsedBuyPrice, buyUnit, parsedCurrentPrice, currentUnit);
+    const calculation = calculateProfitAndRoi(
+      parsedBuyPrice,
+      buyUnit,
+      parsedCurrentPrice,
+      currentUnit,
+      parsedQuantity,
+      quantityUnit,
+    );
     setResult(calculation);
   };
 
@@ -90,6 +102,13 @@ const App = () => {
             onValueChange={setCurrentPrice}
             onUnitChange={setCurrentUnit}
           />
+          <QuantityInput
+            title={t('common.quantity')}
+            value={quantity}
+            unit={quantityUnit}
+            onValueChange={setQuantity}
+            onUnitChange={setQuantityUnit}
+          />
         </div>
 
         <div className="flex justify-center">
@@ -109,10 +128,14 @@ const App = () => {
             currentXi={result.currentXi}
             profitPerXi={result.profitPerXi}
             roiPercentage={result.roiPercentage}
+            quantityXi={result.quantityXi}
+            totalBuyValue={result.totalBuyValue}
+            totalCurrentValue={result.totalCurrentValue}
+            totalProfit={result.totalProfit}
           />
         ) : (
           <div className="w-full rounded-xl border border-dashed border-amber-200 bg-white/60 p-5 text-center text-sm text-gray-600">
-            Enter both prices to see your profit and ROI.
+            {t('common.empty_state')}
           </div>
         )}
       </div>
