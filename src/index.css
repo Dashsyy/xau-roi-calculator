@@ -9,6 +9,7 @@
 }
 
 body {
+  font-family: "Kantumruy Pro", sans-serif;
   @apply bg-[#f0f1f3] text-gray-900 antialiased;
 }
 
