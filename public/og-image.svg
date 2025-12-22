@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <style>
+      :root {
+        --gold: #D4AF37;
+        --text: #0F172A;
+        --muted: #4B5563;
+      }
+      text {
+        font-family: 'Inter', 'Kantumruy Pro', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        font-kerning: normal;
+      }
+    </style>
+  </defs>
+  <rect width="1200" height="630" fill="#fff" />
+  <!-- Icon group -->
+  <g transform="translate(470 150)">
+    <polygon points="30,30 170,30 190,70 50,70" fill="#F5E6B5" />
+    <polygon points="50,70 190,70 170,110 30,110" fill="var(--gold)" />
+    <polygon points="170,30 210,30 230,70 190,70" fill="#C1981D" />
+    <rect x="65" y="60" width="60" height="12" fill="#F9F1D3" rx="6" />
+    <circle cx="210" cy="85" r="16" fill="var(--gold)" />
+    <text x="210" y="91" font-size="26" font-weight="700" text-anchor="middle" fill="#fff">%</text>
+  </g>
+  <text x="600" y="365" fill="var(--text)" font-size="160" font-weight="900" text-anchor="middle" letter-spacing="2">
+    +23.5% ROI
+  </text>
+  <text x="600" y="420" fill="var(--muted)" font-size="42" font-weight="600" text-anchor="middle">
+    Gold ROI Calculator
+  </text>
+</svg>
