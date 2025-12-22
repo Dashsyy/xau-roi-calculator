@@ -50,7 +50,8 @@ export type TranslationKey =
   | 'common.save_result'
   | 'common.tip_buy_price'
   | 'common.tip_current_price'
-  | 'common.tip_quantity';
+  | 'common.tip_quantity'
+  | 'common.tip_result';
 
 export const translations: Record<SupportedLanguage, Record<TranslationKey, string>> = {
   en: {
@@ -104,6 +105,7 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.tip_buy_price': 'Enter your buy price',
     'common.tip_current_price': 'Enter the current price',
     'common.tip_quantity': 'Add your quantity',
+    'common.tip_result': 'View result above',
   },
   km: {
     'common.app_title': 'គណនាផលចំណេញមាស',
@@ -156,6 +158,7 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.tip_buy_price': 'សូមបញ្ចូលតម្លៃដែលអ្នកទិញ',
     'common.tip_current_price': 'សូមបញ្ចូលតម្លៃបច្ចុប្បន្ន',
     'common.tip_quantity': 'សូមបញ្ចូលបរិមាណ',
+    'common.tip_result': 'មើលលទ្ធផលនៅខាងលើ',
   },
   zh: {
     'common.app_title': '黄金投资回报计算器',
@@ -208,5 +211,6 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.tip_buy_price': '请输入买入价格',
     'common.tip_current_price': '请输入当前价格',
     'common.tip_quantity': '请输入数量',
+    'common.tip_result': '查看上方结果',
   },
 };
