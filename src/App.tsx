@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PriceInput from './components/PriceInput';
 import QuantityInput from './components/QuantityInput';
 import ResultCard from './components/ResultCard';
@@ -7,6 +7,7 @@ import { GoldUnit, QuantityUnit, calculateProfitAndRoi } from './utils/goldConve
 import LanguageToggle from './components/LanguageToggle';
 import FloatingStepTip from './components/FloatingStepTip';
 import { Step, getNextStep } from './utils/steps';
+import { TranslationKey } from './i18n/translations';
 
 const App = () => {
   const { t } = useLanguage();
@@ -18,6 +19,7 @@ const App = () => {
   const [quantityUnit, setQuantityUnit] = useState<QuantityUnit>('xi');
   const [result, setResult] = useState<ReturnType<typeof calculateProfitAndRoi> | null>(null);
 
+  const resultRef = useRef<HTMLDivElement | null>(null);
   const buyPriceRef = useRef<HTMLDivElement | null>(null);
   const currentPriceRef = useRef<HTMLDivElement | null>(null);
   const quantityRef = useRef<HTMLDivElement | null>(null);
@@ -67,23 +69,40 @@ const App = () => {
     runCalculation();
   }, [runCalculation]);
 
-  const handleTipPress = useCallback(() => {
-    const targetMap: Record<Step, HTMLDivElement | null> = {
-      [Step.BuyPrice]: buyPriceRef.current,
-      [Step.CurrentPrice]: currentPriceRef.current,
-      [Step.Quantity]: quantityRef.current,
-    };
+  type StepResolution = {
+    message: string;
+    targetRef: RefObject<HTMLDivElement>;
+  };
 
-    if (!nextStep) return;
-    const target = targetMap[nextStep];
-    target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, [nextStep]);
+  const resolveStep = useCallback(
+    (step: Step | null): StepResolution | null => {
+      if (!step) return null;
+
+      const stepMap: Record<Step, { key: TranslationKey; ref: RefObject<HTMLDivElement> }> = {
+        [Step.BuyPrice]: { key: 'common.tip_buy_price', ref: buyPriceRef },
+        [Step.CurrentPrice]: { key: 'common.tip_current_price', ref: currentPriceRef },
+        [Step.Quantity]: { key: 'common.tip_quantity', ref: quantityRef },
+        [Step.Result]: { key: 'common.tip_result', ref: resultRef },
+      };
+
+      const config = stepMap[step];
+      return { message: t(config.key), targetRef: config.ref };
+    },
+    [t],
+  );
+
+  const stepConfig = useMemo(() => resolveStep(nextStep), [nextStep, resolveStep]);
+
+  const handleTipPress = useCallback(() => {
+    if (!stepConfig) return;
+    stepConfig.targetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [stepConfig]);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <div className="mx-auto flex min-h-screen max-w-md items-start justify-center px-4 py-6">
         <div className="flex w-full flex-col gap-6 rounded-2xl bg-white p-6 ring-1 ring-gray-200">
-          <header className="flex items-center justify-between">
+          <header className="flex items-center justify-between" ref={resultRef}>
             <div></div>
             <div className="text-center">
               <p className="text-[11px] font-semibold uppercase text-gray-500">{t('common.app_label')}</p>
@@ -137,7 +156,7 @@ const App = () => {
             <LanguageToggle/>
           </div>
         </div>
-        <FloatingStepTip step={nextStep} onPress={handleTipPress} />
+        <FloatingStepTip message={stepConfig?.message ?? null} onPress={handleTipPress} />
       </div>
     </div>
   );
