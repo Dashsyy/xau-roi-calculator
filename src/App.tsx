@@ -4,6 +4,7 @@ import QuantityInput from './components/QuantityInput';
 import ResultCard from './components/ResultCard';
 import { useLanguage } from './i18n/LanguageContext';
 import { GoldUnit, QuantityUnit, calculateProfitAndRoi } from './utils/goldConversion';
+import LanguageToggle from './components/LanguageToggle';
 
 const App = () => {
   const { t } = useLanguage();
@@ -105,6 +106,9 @@ const App = () => {
               onUnitChange={setQuantityUnit}
             />
           </main>
+          <div className='flex justify-center'>
+            <LanguageToggle/>
+          </div>
         </div>
       </div>
     </div>
