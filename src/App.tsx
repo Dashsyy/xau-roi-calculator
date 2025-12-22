@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PriceInput from './components/PriceInput';
 import QuantityInput from './components/QuantityInput';
 import ResultCard from './components/ResultCard';
 import { useLanguage } from './i18n/LanguageContext';
 import { GoldUnit, QuantityUnit, calculateProfitAndRoi } from './utils/goldConversion';
 import LanguageToggle from './components/LanguageToggle';
+import FloatingStepTip from './components/FloatingStepTip';
+import { Step, getNextStep } from './utils/steps';
 
 const App = () => {
   const { t } = useLanguage();
@@ -16,9 +18,18 @@ const App = () => {
   const [quantityUnit, setQuantityUnit] = useState<QuantityUnit>('xi');
   const [result, setResult] = useState<ReturnType<typeof calculateProfitAndRoi> | null>(null);
 
+  const buyPriceRef = useRef<HTMLDivElement | null>(null);
+  const currentPriceRef = useRef<HTMLDivElement | null>(null);
+  const quantityRef = useRef<HTMLDivElement | null>(null);
+
   const parsedBuyPrice = Number.parseFloat(buyPrice);
   const parsedCurrentPrice = Number.parseFloat(currentPrice);
   const parsedQuantity = Number.parseFloat(quantity);
+
+  const nextStep = useMemo(
+    () => getNextStep(parsedBuyPrice, parsedCurrentPrice, parsedQuantity),
+    [parsedBuyPrice, parsedCurrentPrice, parsedQuantity],
+  );
 
   const isInputValid = useMemo(() => {
     const hasValidBuy = Number.isFinite(parsedBuyPrice) && parsedBuyPrice > 0;
@@ -56,6 +67,18 @@ const App = () => {
     runCalculation();
   }, [runCalculation]);
 
+  const handleTipPress = useCallback(() => {
+    const targetMap: Record<Step, HTMLDivElement | null> = {
+      [Step.BuyPrice]: buyPriceRef.current,
+      [Step.CurrentPrice]: currentPriceRef.current,
+      [Step.Quantity]: quantityRef.current,
+    };
+
+    if (!nextStep) return;
+    const target = targetMap[nextStep];
+    target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, [nextStep]);
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <div className="mx-auto flex min-h-screen max-w-md items-start justify-center px-4 py-6">
@@ -81,14 +104,16 @@ const App = () => {
           />
 
           <main className="flex flex-1 flex-col gap-4 pb-2">
-            <PriceInput
-              title={t('common.buy_price_label')}
-              value={buyPrice}
-              unit={buyUnit}
-              onValueChange={setBuyPrice}
-              onUnitChange={setBuyUnit}
-            />
-            <div className="space-y-2">
+            <div ref={buyPriceRef}>
+              <PriceInput
+                title={t('common.buy_price_label')}
+                value={buyPrice}
+                unit={buyUnit}
+                onValueChange={setBuyPrice}
+                onUnitChange={setBuyUnit}
+              />
+            </div>
+            <div className="space-y-2" ref={currentPriceRef}>
               <PriceInput
                 title={t('common.current_price_label')}
                 value={currentPrice}
@@ -98,18 +123,21 @@ const App = () => {
               />
               <p className="px-1 text-sm text-gray-500">{t('common.comparison_note')}</p>
             </div>
-            <QuantityInput
-              title={t('common.quantity_label')}
-              value={quantity}
-              unit={quantityUnit}
-              onValueChange={setQuantity}
-              onUnitChange={setQuantityUnit}
-            />
+            <div ref={quantityRef}>
+              <QuantityInput
+                title={t('common.quantity_label')}
+                value={quantity}
+                unit={quantityUnit}
+                onValueChange={setQuantity}
+                onUnitChange={setQuantityUnit}
+              />
+            </div>
           </main>
           <div className='flex justify-center'>
             <LanguageToggle/>
           </div>
         </div>
+        <FloatingStepTip step={nextStep} onPress={handleTipPress} />
       </div>
     </div>
   );
