@@ -29,7 +29,7 @@ const ResultCard = ({
   const heroColor = isGain ? 'text-emerald-600' : isLoss ? 'text-red-600' : 'text-gray-900';
 
   return (
-    <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
+    <div className="rounded-xl bg-white p-6 ring-1 ring-gray-200">
       <div className="space-y-6">
         <div className="text-center">
           <p className={`text-base font-semibold capitalize ${heroColor}`}>{statusLabel}</p>
@@ -37,17 +37,17 @@ const ResultCard = ({
         </div>
 
         <div className="flex items-center justify-between gap-4 text-gray-900">
-          <div className="flex-1 rounded-2xl bg-gray-50 px-4 py-3 text-left">
+          <div className="flex-1 rounded-lg bg-gray-50 px-4 py-3 text-left ring-1 ring-gray-200">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">{t('common.current_value')}</p>
             <p className="mt-1 text-2xl font-bold">${formatNumber(totalCurrentValue)}</p>
           </div>
-          <div className="flex-1 rounded-2xl bg-gray-50 px-4 py-3 text-left">
+          <div className="flex-1 rounded-lg bg-gray-50 px-4 py-3 text-left ring-1 ring-gray-200">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">{t('common.you_paid')}</p>
             <p className="mt-1 text-2xl font-bold">${formatNumber(totalBuyValue)}</p>
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-2 rounded-2xl bg-gray-900/5 px-4 py-3 text-sm font-semibold text-gray-700">
+        <div className="flex items-center justify-between gap-2 rounded-md bg-gray-900/5 px-4 py-3 text-sm font-semibold text-gray-700 ring-1 ring-gray-200">
           <div className="flex items-center gap-1">
             <span className="text-gray-500">{t('common.roi')}</span>
             <span className={isGain ? 'text-emerald-600' : isLoss ? 'text-red-600' : 'text-gray-900'}>
@@ -65,7 +65,7 @@ const ResultCard = ({
           </div>
         </div>
 
-        <div className="rounded-2xl bg-gray-50 px-4 py-3 text-xs text-gray-500">
+        <div className="rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-500 ring-1 ring-gray-200">
           <div className="flex items-center justify-between">
             <span>{t('common.profit_per_xi')}</span>
             <span className="font-semibold text-gray-800">${formatNumber(profitPerXi)}</span>

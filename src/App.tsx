@@ -61,7 +61,7 @@ const App = () => {
         <div className="space-y-6">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400">{t('common.currency_converter')}</p>
 
-          <header className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 shadow-sm">
+          <header className="flex items-center justify-between rounded-xl bg-white px-4 py-3 ring-1 ring-gray-200">
             <button
               type="button"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-800"
