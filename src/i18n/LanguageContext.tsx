@@ -7,7 +7,8 @@ type LanguageContextValue = {
   t: (key: TranslationKey) => string;
 };
 
-const defaultLanguage: SupportedLanguage = 'en';
+const defaultLanguage: SupportedLanguage = 'km';
+
 const LOCAL_STORAGE_KEY = 'preferredLanguage';
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
