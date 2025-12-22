@@ -29,15 +29,14 @@ const ResultCard = ({
   const statusLabel = isGain ? t('common.you_gain') : isLoss ? t('common.you_lose') : t('common.break_even');
 
   return (
-    <div className="w-full rounded-3xl border border-white/60 bg-white/80 p-5 shadow-sm backdrop-blur">
-      <div className="space-y-5">
+    <div className="w-full rounded-3xl border border-white/70 bg-white/95 p-6 shadow-sm backdrop-blur">
+      <div className="space-y-6">
         <div className="text-center">
-          <p className="text-sm font-semibold text-gray-600">{statusLabel}</p>
-          <p className={`mt-1 text-6xl font-black tracking-tight ${profitClass}`}>${formatNumber(totalProfit)}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gray-500">{statusLabel}</p>
+          <p className={`mt-2 text-6xl font-black tracking-tight ${profitClass}`}>${formatNumber(totalProfit)}</p>
         </div>
 
-        <div className="space-y-2 rounded-2xl bg-gray-50 p-4 text-gray-900 shadow-inner">
-          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-gray-500">{t('common.total_value_title')}</p>
+        <div className="space-y-3 rounded-2xl bg-gray-50 px-5 py-4 text-gray-900 shadow-inner">
           <div className="flex items-center justify-between text-lg font-semibold">
             <span>{t('common.you_paid')}</span>
             <span>${formatNumber(totalBuyValue)}</span>
@@ -48,7 +47,7 @@ const ResultCard = ({
           </div>
         </div>
 
-        <div className="space-y-3 rounded-2xl bg-white p-4 shadow-inner ring-1 ring-gray-100">
+        <div className="space-y-3 rounded-2xl bg-white px-5 py-4 shadow-inner ring-1 ring-gray-100">
           <div className="flex items-center justify-between text-sm text-gray-600">
             <span className="font-semibold text-gray-700">{t('common.roi')}</span>
             <span className="text-base font-bold text-gray-900">{formatNumber(roiPercentage)}%</span>
