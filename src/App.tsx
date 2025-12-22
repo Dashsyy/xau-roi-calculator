@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import PriceInput from './components/PriceInput';
 import ResultCard from './components/ResultCard';
+import { useLanguage } from './i18n/LanguageContext';
 import { GoldUnit, calculateProfitAndRoi } from './utils/goldConversion';
 
 type CalculationResult = ReturnType<typeof calculateProfitAndRoi>;
 
 const App = () => {
+  const { t, language, setLanguage } = useLanguage();
   const [buyPrice, setBuyPrice] = useState('');
   const [buyUnit, setBuyUnit] = useState<GoldUnit>('xi');
   const [currentPrice, setCurrentPrice] = useState('');
@@ -40,24 +42,49 @@ const App = () => {
   return (
     <div className="min-h-screen px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl space-y-6">
-        <header className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-wide text-amber-700">Cambodia</p>
-          <h1 className="text-3xl font-bold text-gray-900">Gold ROI Calculator</h1>
-          <p className="mt-2 text-base text-gray-600">
-            Compare your gold buy price with the current market price across xi, domlang, and ounce units.
+        <header className="space-y-4 text-center">
+          <div className="flex items-center justify-center gap-3">
+            <p className="text-sm font-semibold uppercase tracking-wide text-amber-700">Cambodia</p>
+            <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-white px-3 py-1 text-sm font-medium text-gray-800 shadow-sm">
+              <span className="text-amber-700">{t('common.language')}:</span>
+              <div className="flex gap-1">
+                {(
+                  [
+                    { code: 'en' as const, label: 'EN' },
+                    { code: 'km' as const, label: 'KM' },
+                    { code: 'zh' as const, label: '中文' },
+                  ]
+                ).map((option) => (
+                  <button
+                    key={option.code}
+                    type="button"
+                    onClick={() => setLanguage(option.code)}
+                    className={`rounded px-2 py-1 transition ${
+                      language === option.code ? 'bg-amber-600 text-white' : 'text-gray-700 hover:bg-amber-100'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900">{t('common.app_title')}</h1>
+          <p className="text-base text-gray-600">
+            {t('common.buy_price')} / {t('common.current_price')} ({t('common.unit_xi')}, {t('common.unit_domlang')}, {t('common.unit_ounce')})
           </p>
         </header>
 
         <div className="grid grid-cols-1 gap-4">
           <PriceInput
-            title="Buy Price"
+            title={t('common.buy_price')}
             value={buyPrice}
             unit={buyUnit}
             onValueChange={setBuyPrice}
             onUnitChange={setBuyUnit}
           />
           <PriceInput
-            title="Current Price"
+            title={t('common.current_price')}
             value={currentPrice}
             unit={currentUnit}
             onValueChange={setCurrentPrice}
@@ -72,7 +99,7 @@ const App = () => {
             disabled={!isInputValid}
             className="w-full rounded-lg bg-amber-600 px-4 py-3 text-base font-semibold text-white shadow transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:bg-amber-300 sm:w-auto"
           >
-            Calculate
+            {t('common.calculate')}
           </button>
         </div>
 

@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import { GoldUnit } from '../utils/goldConversion';
 
 type PriceInputProps = {
@@ -12,6 +13,14 @@ type PriceInputProps = {
 const units: GoldUnit[] = ['xi', 'domlang', 'ounce'];
 
 const PriceInput = ({ title, value, unit, onValueChange, onUnitChange }: PriceInputProps) => {
+  const { t } = useLanguage();
+
+  const unitLabels: Record<GoldUnit, string> = {
+    xi: t('common.unit_xi'),
+    domlang: t('common.unit_domlang'),
+    ounce: t('common.unit_ounce'),
+  };
+
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     onValueChange(event.target.value);
   };
@@ -29,7 +38,7 @@ const PriceInput = ({ title, value, unit, onValueChange, onUnitChange }: PriceIn
           inputMode="decimal"
           value={value}
           onChange={handleValueChange}
-          placeholder="Enter price"
+          placeholder={title}
           className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-base text-gray-900 focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
         />
         <select
@@ -39,7 +48,7 @@ const PriceInput = ({ title, value, unit, onValueChange, onUnitChange }: PriceIn
         >
           {units.map((option) => (
             <option key={option} value={option}>
-              {option}
+              {unitLabels[option]}
             </option>
           ))}
         </select>
