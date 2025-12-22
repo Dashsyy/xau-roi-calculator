@@ -98,9 +98,47 @@ const App = () => {
     stepConfig.targetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [stepConfig]);
 
+  type PnlState = 'gain' | 'loss' | 'neutral';
+
+  const pnlState = useMemo<PnlState>(() => {
+    if (!result) return 'neutral';
+    if (result.totalProfit > 0) return 'gain';
+    if (result.totalProfit < 0) return 'loss';
+    return 'neutral';
+  }, [result]);
+
+  const pnlTintClass = useMemo(() => {
+    const map: Record<PnlState, string> = {
+      gain: 'bg-emerald-50',
+      loss: 'bg-red-50',
+      neutral: 'bg-gray-50',
+    };
+    return map[pnlState];
+  }, [pnlState]);
+
+  useEffect(() => {
+    const colorMap: Record<PnlState, string> = {
+      gain: '#ecfdf3',
+      loss: '#fef2f2',
+      neutral: '#f9fafb',
+    };
+    const color = colorMap[pnlState];
+    const existingMeta = document.querySelector("meta[name='theme-color']");
+
+    if (existingMeta) {
+      existingMeta.setAttribute('content', color);
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.content = color;
+      document.head.appendChild(meta);
+    }
+  }, [pnlState]);
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      <div className="mx-auto flex min-h-screen max-w-md items-start justify-center px-4 py-6">
+      <div className={`safe-area-tint ${pnlTintClass}`} aria-hidden />
+      <div className="mx-auto flex min-h-screen max-w-md items-start justify-center px-4 py-6 pt-safe">
         <div className="flex w-full flex-col gap-6 rounded-2xl bg-white p-6 ring-1 ring-gray-200">
           <header className="flex items-center justify-between" ref={resultRef}>
             <div></div>
