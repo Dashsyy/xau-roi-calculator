@@ -3,14 +3,21 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Inter', 'Noto Sans Khmer', 'Noto Sans SC', 'SF Pro Display', 'SF Pro Text', system-ui, -apple-system, sans-serif;
+  --font-body: "Kantumruy Pro", "Noto Sans Khmer", "Noto Sans SC", sans-serif;
+  --font-display: "Space Grotesk", "Kantumruy Pro", "Noto Sans Khmer", "Noto Sans SC", sans-serif;
+  font-family: var(--font-body);
   color: #0f172a;
-  background-color: #f0f1f3;
+  background-color: #f1f0ec;
 }
 
 body {
-  font-family: "Kantumruy Pro", sans-serif;
-  @apply bg-[#f0f1f3] text-gray-900 antialiased;
+  font-family: var(--font-body);
+  @apply bg-[#f1f0ec] text-gray-900 antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 input:focus,

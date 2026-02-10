@@ -9,7 +9,7 @@ const LanguageToggle = () => {
       <button
         type="button"
         onClick={() => setLanguage('km')}
-        className={`rounded-md px-3 py-1.5 text-xs font-semibold ring-1 transition
+        className={`font-display rounded-none px-3 py-1.5 text-xs font-semibold ring-1 transition
           ${language === 'km'
             ? 'bg-gray-900 text-white ring-gray-900'
             : 'bg-white text-gray-700 ring-gray-200 hover:bg-gray-50'}
@@ -21,7 +21,7 @@ const LanguageToggle = () => {
       <button
         type="button"
         onClick={() => setLanguage('en')}
-        className={`rounded-md px-3 py-1.5 text-xs font-semibold ring-1 transition
+        className={`font-display rounded-none px-3 py-1.5 text-xs font-semibold ring-1 transition
           ${language === 'en'
             ? 'bg-gray-900 text-white ring-gray-900'
             : 'bg-white text-gray-700 ring-gray-200 hover:bg-gray-50'}

@@ -136,15 +136,17 @@ const App = () => {
   }, [pnlState]);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-[#f6f4ef] via-[#f2f1ec] to-[#ecebe6] text-gray-900">
       <div className={`safe-area-tint ${pnlTintClass}`} aria-hidden />
-      <div className="mx-auto flex min-h-screen max-w-md items-start justify-center px-4 py-6 pt-safe">
-        <div className="flex w-full flex-col gap-6 rounded-2xl bg-white p-6 ring-1 ring-gray-200">
+      <div className="mx-auto flex min-h-screen w-full max-w-lg items-start justify-center px-3 py-5 pt-safe sm:px-6 sm:py-8">
+        <div className="flex w-full flex-col gap-6 border border-gray-200 bg-white p-5 sm:p-7">
           <header className="flex items-center justify-between" ref={resultRef}>
             <div></div>
             <div className="text-center">
-              <p className="text-[11px] font-semibold uppercase text-gray-500">{t('common.app_label')}</p>
-              <h1 className="text-lg font-bold text-gray-900">{t('common.app_title')}</h1>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gray-500">{t('common.app_label')}</p>
+              <h1 className="font-display text-xl font-semibold tracking-[-0.01em] text-gray-900 sm:text-2xl">
+                {t('common.app_title')}
+              </h1>
             </div>
             <div></div>
           </header>
@@ -190,8 +192,8 @@ const App = () => {
               />
             </div>
           </main>
-          <div className='flex justify-center'>
-            <LanguageToggle/>
+          <div className="flex justify-center">
+            <LanguageToggle />
           </div>
         </div>
         <FloatingStepTip message={stepConfig?.message ?? null} onPress={handleTipPress} />

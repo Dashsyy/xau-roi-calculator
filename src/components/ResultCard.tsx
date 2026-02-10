@@ -43,9 +43,9 @@ const ResultCard = ({
     <section className="space-y-6">
       {/* Hero */}
       <div className="text-center">
-        <p className={`text-sm font-semibold ${heroColor}`}>{statusLabel}</p>
+        <p className={`text-[12px] font-semibold uppercase tracking-[0.18em] ${heroColor}`}>{statusLabel}</p>
         <p
-          className={`mt-1 text-5xl font-extrabold tracking-tight ${heroColor}`}
+          className={`font-display mt-1 text-4xl font-semibold leading-none tracking-[-0.02em] ${heroColor} sm:text-5xl`}
         >
           ${formatNumber(totalProfit)}
         </p>
@@ -54,10 +54,10 @@ const ResultCard = ({
       {/* Current vs Paid */}
       <div className="flex items-center justify-center gap-6 text-center">
         <div className="flex flex-1 flex-col items-center">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">
             {t("common.current_value")}
           </p>
-          <p className="mt-1 text-2xl font-bold text-gray-900">
+          <p className="font-display mt-1 text-xl font-semibold text-gray-900 sm:text-2xl">
             ${formatNumber(totalCurrentValue)}
           </p>
         </div>
@@ -65,17 +65,17 @@ const ResultCard = ({
         <div className="h-10 w-px bg-gray-200" aria-hidden />
 
         <div className="flex flex-1 flex-col items-center">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">
             {t("common.you_paid")}
           </p>
-          <p className="mt-1 text-2xl font-bold text-gray-900">
+          <p className="font-display mt-1 text-xl font-semibold text-gray-900 sm:text-2xl">
             ${formatNumber(totalBuyValue)}
           </p>
         </div>
       </div>
 
       {/* Stats section – vertical columns (stacked rows) */}
-      <div className="rounded-xl bg-gray-50 px-4 py-3 ring-1 ring-gray-200">
+      <div className="border border-gray-200 bg-gray-50 px-4 py-3">
         <div className="space-y-2 text-sm font-semibold text-gray-700">
           <div className="flex items-center justify-between">
             <span className="text-gray-500">{t("common.roi")}</span>
@@ -110,7 +110,7 @@ const ResultCard = ({
       </div>
 
       {/* Footer details */}
-      <div className="rounded-xl bg-gray-50 px-4 py-3 text-xs ring-1 ring-gray-200">
+      <div className="border border-gray-200 bg-gray-50 px-4 py-3 text-xs">
         <div className="flex items-center justify-between text-gray-600">
           <span>{t("common.profit_per_xi")}</span>
           <span className="font-semibold text-gray-900">
