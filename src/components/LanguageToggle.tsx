@@ -24,16 +24,6 @@ const LanguageToggle = () => {
       >
         EN
       </button>
-      
-      <button
-        type="button"
-        onClick={() => setLanguage('zh')}
-        className={`px-4 py-2 text-sm font-black uppercase transition-colors border-l-2 border-black
-          ${language === 'zh' ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'}
-        `}
-      >
-        中文
-      </button>
     </div>
   );
 };

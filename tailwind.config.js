@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}'
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['"Kantumruy Pro"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      padding: {
+        'safe': 'env(safe-area-inset-top)',
       },
     },
   },
   plugins: [],
-};
+}

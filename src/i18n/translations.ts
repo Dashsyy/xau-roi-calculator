@@ -1,4 +1,4 @@
-export type SupportedLanguage = 'en' | 'km' | 'zh';
+export type SupportedLanguage = 'en' | 'km';
 
 export type TranslationKey =
   | 'common.app_title'
@@ -48,10 +48,6 @@ export type TranslationKey =
   | 'common.price_label'
   | 'common.quantity_short'
   | 'common.save_result'
-  | 'common.tip_buy_price'
-  | 'common.tip_current_price'
-  | 'common.tip_quantity'
-  | 'common.tip_prices'
   | 'common.equivalent_to'
   | 'common.use_market_price'
   | 'common.loading'
@@ -59,7 +55,18 @@ export type TranslationKey =
   | 'common.use_latest_market'
   | 'common.next'
   | 'common.back'
-  | 'common.finish';
+  | 'common.finish'
+  | 'common.dashboard_title'
+  | 'common.refresh_price'
+  | 'common.price_updated'
+  | 'common.last_updated'
+  | 'common.previous_price'
+  | 'common.price_trend_up'
+  | 'common.price_trend_down'
+  | 'common.onboarding_welcome'
+  | 'common.market_closed'
+  | 'common.market_open'
+  | 'common.market_closed_prediction';
 
 export const translations: Record<SupportedLanguage, Record<TranslationKey, string>> = {
   en: {
@@ -118,10 +125,17 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.quantity_short': 'Qty',
     'common.save_result': 'Save Result',
     'common.equivalent_to': 'Equivalent to',
-    'common.tip_prices': 'Enter your buy and current prices',
-    'common.tip_buy_price': 'Enter your buy price',
-    'common.tip_current_price': 'Enter the current price',
-    'common.tip_quantity': 'Add your quantity',
+    'common.dashboard_title': 'Your Dashboard',
+    'common.refresh_price': 'Refresh Price',
+    'common.price_updated': 'Price updated successfully!',
+    'common.last_updated': 'Last updated',
+    'common.previous_price': 'Previous',
+    'common.price_trend_up': 'Price went up!',
+    'common.price_trend_down': 'Price went down',
+    'common.onboarding_welcome': 'Let\'s set up your gold holdings',
+    'common.market_closed': 'Market Closed (Weekend)',
+    'common.market_open': 'Market Open',
+    'common.market_closed_prediction': 'The international market is currently closed. For predictions, you can manually adjust the current price below.',
   },
   km: {
     'common.app_title': 'គណនាផលចំណេញមាស',
@@ -179,70 +193,16 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.quantity_short': 'បរិ.',
     'common.save_result': 'រក្សាទុកលទ្ធផល',
     'common.equivalent_to': 'ស្មើនឹងប្រហែល',
-    'common.tip_prices': 'សូមបញ្ចូលតម្លៃទិញ និងតម្លៃបច្ចុប្បន្ន',
-    'common.tip_buy_price': 'សូមបញ្ចូលតម្លៃដែលអ្នកទិញ',
-    'common.tip_current_price': 'សូមបញ្ចូលតម្លៃបច្ចុប្បន្ន',
-    'common.tip_quantity': 'សូមបញ្ចូលបរិមាណ',
-  },
-  zh: {
-    'common.app_title': '黄金投资回报计算器',
-    'common.app_label': '计算器',
-    'common.short_description': '按今日金价快速查看你的收益。',
-    'common.buy_price': '买入价格',
-    'common.current_price': '当前价格',
-    'common.calculate': '计算',
-    'common.result': '结果',
-    'common.unit_xi': '每希',
-    'common.unit_domlang': '每东朗',
-    'common.unit_ounce': '每盎司',
-    'common.profit_per_xi': '每希利润',
-    'common.roi': '投资回报率',
-    'common.language': '语言',
-    'common.quantity': '数量',
-    'common.total_buy_value': '买入总额',
-    'common.total_current_value': '当前总额',
-    'common.total_profit': '总利润 / 亏损',
-    'common.empty_state': '请输入数值以查看利润和回报率。',
-    'common.tagline': '柬埔寨金店简单计算器',
-    'common.auto_update': '自动更新',
-    'common.fill_all': '请填写完整',
-    'common.quantity_hint': '希或东朗',
-    'common.you_gain': '盈利',
-    'common.you_lose': '亏损',
-    'common.break_even': '不赚不赔',
-    'common.you_paid': '已支付',
-    'common.current_value': '当前价值',
-    'common.price_now': '现价',
-    'common.ready_hint': '输入即计算，如需可再点计算',
-    'common.input_helper': '输入你的黄金数值',
-    'common.primary_cta': '立即计算',
-    'common.new_calculation': '重新计算',
-    'common.next': '下一步',
-    'common.back': '返回',
-    'common.finish': '查看结果',
-    'common.welcome_back': '欢迎回来！想现在查看你的收益吗？',
-    'common.use_latest_market': '获取最新金价',
-    'common.use_market_price': '使用市场现价',
-    'common.loading': '正在加载...',
-    'common.total_value_title': '总价值',
-    'common.currency_converter': '货币换算器',
-    'common.buy_price_label': '买入价格',
-    'common.current_price_label': '当前价格',
-    'common.quantity_label': '数量',
-    'common.comparison_note': '价格将以同一黄金单位比较',
-    'common.quantity_placeholder': '输入数量',
-    'common.amount_placeholder': '输入金额',
-    'common.per_unit': '每单位',
-    'common.unit_xi_short': '希',
-    'common.unit_domlang_short': '东朗',
-    'common.unit_ounce_short': '盎司',
-    'common.price_label': '价格',
-    'common.quantity_short': '数量',
-    'common.save_result': '保存结果',
-    'common.equivalent_to': '相当于',
-    'common.tip_prices': '请输入买入和当前价格',
-    'common.tip_buy_price': '请输入买入价格',
-    'common.tip_current_price': '请输入当前价格',
-    'common.tip_quantity': '请输入数量',
+    'common.dashboard_title': 'ផ្ទាំងគ្រប់គ្រងរបស់អ្នក',
+    'common.refresh_price': 'ធ្វើបច្ចុប្បន្នភាពតម្លៃ',
+    'common.price_updated': 'ធ្វើបច្ចុប្បន្នភាពតម្លៃដោយជោគជ័យ!',
+    'common.last_updated': 'ធ្វើបច្ចុប្បន្នភាពចុងក្រោយ',
+    'common.previous_price': 'តម្លៃមុន',
+    'common.price_trend_up': 'តម្លៃឡើង!',
+    'common.price_trend_down': 'តម្លៃចុះ',
+    'common.onboarding_welcome': 'សូមរៀបចំទិន្នន័យមាសរបស់អ្នក',
+    'common.market_closed': 'ទីផ្សារបិទ (ចុងសប្តាហ៍)',
+    'common.market_open': 'ទីផ្សារបើក',
+    'common.market_closed_prediction': 'ទីផ្សារអន្តរជាតិកំពុងបិទ។ ប្រសិនបើអ្នកចង់សាកល្បងមើលផលចំណេញទុកជាមុន អ្នកអាចកែសម្រួលតម្លៃបច្ចុប្បន្នដោយខ្លួនឯងនៅខាងក្រោម។',
   },
 };
