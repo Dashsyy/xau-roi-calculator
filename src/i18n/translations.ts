@@ -51,7 +51,15 @@ export type TranslationKey =
   | 'common.tip_buy_price'
   | 'common.tip_current_price'
   | 'common.tip_quantity'
-  | 'common.tip_result';
+  | 'common.tip_prices'
+  | 'common.equivalent_to'
+  | 'common.use_market_price'
+  | 'common.loading'
+  | 'common.welcome_back'
+  | 'common.use_latest_market'
+  | 'common.next'
+  | 'common.back'
+  | 'common.finish';
 
 export const translations: Record<SupportedLanguage, Record<TranslationKey, string>> = {
   en: {
@@ -87,6 +95,13 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.input_helper': 'Enter your gold values below',
     'common.primary_cta': 'Calculate now',
     'common.new_calculation': 'New calculation',
+    'common.next': 'Next',
+    'common.back': 'Back',
+    'common.finish': 'See Result',
+    'common.welcome_back': 'Welcome back! Want to check your profit now?',
+    'common.use_latest_market': 'Get Latest Price',
+    'common.use_market_price': 'Use Market Price',
+    'common.loading': 'Loading...',
     'common.total_value_title': 'Total value',
     'common.currency_converter': 'Currency Converter',
     'common.buy_price_label': 'Buy Price',
@@ -102,10 +117,11 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.price_label': 'Price',
     'common.quantity_short': 'Qty',
     'common.save_result': 'Save Result',
+    'common.equivalent_to': 'Equivalent to',
+    'common.tip_prices': 'Enter your buy and current prices',
     'common.tip_buy_price': 'Enter your buy price',
     'common.tip_current_price': 'Enter the current price',
     'common.tip_quantity': 'Add your quantity',
-    'common.tip_result': 'View result above',
   },
   km: {
     'common.app_title': 'គណនាផលចំណេញមាស',
@@ -140,6 +156,13 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.input_helper': 'បញ្ចូលតម្លៃមាសរបស់អ្នក',
     'common.primary_cta': 'គណនាឥឡូវ',
     'common.new_calculation': 'គណនាថ្មី',
+    'common.next': 'បន្ទាប់',
+    'common.back': 'ថយក្រោយ',
+    'common.finish': 'មើលលទ្ធផល',
+    'common.welcome_back': 'រីករាយដែលបានជួបគ្នាវិញ! តើអ្នកចង់ដឹងពីចំណេញឥឡូវទេ?',
+    'common.use_latest_market': 'ទាញយកតម្លៃឥឡូវ',
+    'common.use_market_price': 'ប្រើតម្លៃទីផ្សារឥឡូវ',
+    'common.loading': 'កំពុងទាញយក...',
     'common.total_value_title': 'តម្លៃសរុប',
     'common.currency_converter': 'កម្មវិធីបម្លែងរូបិយប័ណ្ណ',
     'common.buy_price_label': 'តម្លៃទិញ',
@@ -155,10 +178,11 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.price_label': 'តម្លៃ',
     'common.quantity_short': 'បរិ.',
     'common.save_result': 'រក្សាទុកលទ្ធផល',
+    'common.equivalent_to': 'ស្មើនឹងប្រហែល',
+    'common.tip_prices': 'សូមបញ្ចូលតម្លៃទិញ និងតម្លៃបច្ចុប្បន្ន',
     'common.tip_buy_price': 'សូមបញ្ចូលតម្លៃដែលអ្នកទិញ',
     'common.tip_current_price': 'សូមបញ្ចូលតម្លៃបច្ចុប្បន្ន',
     'common.tip_quantity': 'សូមបញ្ចូលបរិមាណ',
-    'common.tip_result': 'មើលលទ្ធផលនៅខាងលើ',
   },
   zh: {
     'common.app_title': '黄金投资回报计算器',
@@ -193,6 +217,13 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.input_helper': '输入你的黄金数值',
     'common.primary_cta': '立即计算',
     'common.new_calculation': '重新计算',
+    'common.next': '下一步',
+    'common.back': '返回',
+    'common.finish': '查看结果',
+    'common.welcome_back': '欢迎回来！想现在查看你的收益吗？',
+    'common.use_latest_market': '获取最新金价',
+    'common.use_market_price': '使用市场现价',
+    'common.loading': '正在加载...',
     'common.total_value_title': '总价值',
     'common.currency_converter': '货币换算器',
     'common.buy_price_label': '买入价格',
@@ -208,9 +239,10 @@ export const translations: Record<SupportedLanguage, Record<TranslationKey, stri
     'common.price_label': '价格',
     'common.quantity_short': '数量',
     'common.save_result': '保存结果',
+    'common.equivalent_to': '相当于',
+    'common.tip_prices': '请输入买入和当前价格',
     'common.tip_buy_price': '请输入买入价格',
     'common.tip_current_price': '请输入当前价格',
     'common.tip_quantity': '请输入数量',
-    'common.tip_result': '查看上方结果',
   },
 };

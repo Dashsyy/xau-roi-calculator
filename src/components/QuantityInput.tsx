@@ -24,38 +24,36 @@ const QuantityInput = ({ title, value, unit, onValueChange, onUnitChange }: Quan
     onValueChange(event.target.value);
   };
 
-  const handleUnitChange = (nextUnit: QuantityUnit) => {
-    onUnitChange(nextUnit);
-  };
-
   return (
-    <div className="w-full border border-gray-200 bg-gray-50 px-4 py-4">
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500">{title}</p>
+    <div className="w-full border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="mb-6">
+        <label className="text-xl font-black uppercase tracking-tight text-black">{title}</label>
       </div>
-      <div className="space-y-3">
+      
+      <div className="space-y-6">
         <input
           type="number"
           inputMode="decimal"
           min="0"
           value={value}
           onChange={handleValueChange}
-          placeholder={t('common.quantity_placeholder')}
-          className="font-display w-full rounded-none border border-gray-200 bg-white px-4 py-4 text-2xl font-semibold text-gray-900 tracking-[-0.01em] focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900 sm:text-3xl"
+          placeholder="0"
+          className="w-full border-4 border-black bg-white py-8 px-6 text-center text-6xl font-black tracking-tighter text-black outline-none transition-colors placeholder:text-gray-200 focus:bg-yellow-50"
         />
-        <div className="flex gap-2 text-sm font-semibold text-gray-800">
-          {units.map((option) => {
+        
+        <div className="flex border-4 border-black">
+          {units.map((option, idx) => {
             const isActive = unit === option;
             return (
               <button
                 key={option}
                 type="button"
-                className={`flex-1 rounded-none px-3 py-3 transition ${
+                className={`flex-1 py-4 text-sm font-black uppercase transition-colors ${idx !== 0 ? 'border-l-4 border-black' : ''} ${
                   isActive
-                    ? 'border border-gray-900 bg-gray-900 text-white'
-                    : 'border border-gray-300 bg-white text-gray-800 hover:border-gray-400'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black hover:bg-gray-100'
                 }`}
-                onClick={() => handleUnitChange(option)}
+                onClick={() => onUnitChange(option)}
               >
                 {unitLabels[option]}
               </button>

@@ -7,14 +7,14 @@ const FloatingStepTip = ({ message, onPress }: FloatingStepTipProps) => {
   if (!message) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-4 flex justify-center px-4">
+    <div className="pointer-events-none fixed inset-x-0 bottom-32 flex justify-center px-4 z-50">
       <button
         type="button"
         onClick={onPress}
-        className="font-display pointer-events-auto flex max-w-md items-center gap-2 rounded-none bg-gray-900 px-4 py-3 text-sm font-semibold text-white shadow-sm shadow-gray-900/15 ring-1 ring-white/30 transition hover:translate-y-[-1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100"
+        className="pointer-events-auto flex items-center gap-3 border-4 border-black bg-yellow-400 px-6 py-4 text-lg font-black text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95"
       >
-        <span className="flex-1 text-left">{message}</span>
-        <span aria-hidden className="text-lg leading-none">↗</span>
+        <span>{message}</span>
+        <span className="text-2xl leading-none">↗</span>
       </button>
     </div>
   );

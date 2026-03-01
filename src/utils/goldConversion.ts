@@ -2,7 +2,7 @@ export type GoldUnit = 'xi' | 'domlang' | 'ounce';
 export type QuantityUnit = 'xi' | 'domlang';
 
 const OUNCE_TO_XI = 8.23;
-const DOMLANG_TO_XI = 4;
+const DOMLANG_TO_XI = 10;
 
 export const normalizeToXi = (price: number, unit: GoldUnit): number => {
   if (unit === 'xi') return price;

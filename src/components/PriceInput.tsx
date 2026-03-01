@@ -1,6 +1,6 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useMemo } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { GoldUnit } from '../utils/goldConversion';
+import { GoldUnit, formatNumber } from '../utils/goldConversion';
 
 type PriceInputProps = {
   title: string;
@@ -11,6 +11,8 @@ type PriceInputProps = {
 };
 
 const units: GoldUnit[] = ['xi', 'domlang', 'ounce'];
+const OUNCE_TO_XI = 8.23;
+const DOMLANG_TO_XI = 10;
 
 const PriceInput = ({ title, value, unit, onValueChange, onUnitChange }: PriceInputProps) => {
   const { t } = useLanguage();
@@ -25,38 +27,63 @@ const PriceInput = ({ title, value, unit, onValueChange, onUnitChange }: PriceIn
     onValueChange(event.target.value);
   };
 
-  const handleUnitChange = (nextUnit: GoldUnit) => {
-    onUnitChange(nextUnit);
-  };
+  const conversionHint = useMemo(() => {
+    const numValue = Number.parseFloat(value);
+    if (!numValue || numValue <= 0) return null;
+
+    if (unit === 'xi') {
+      const ouncePrice = numValue * OUNCE_TO_XI;
+      return `${t('common.equivalent_to')} $${formatNumber(ouncePrice)} / ${t('common.unit_ounce_short')}`;
+    }
+    if (unit === 'ounce') {
+      const xiPrice = numValue / OUNCE_TO_XI;
+      return `${t('common.equivalent_to')} $${formatNumber(xiPrice)} / ${t('common.unit_xi_short')}`;
+    }
+    if (unit === 'domlang') {
+      const xiPrice = numValue / DOMLANG_TO_XI;
+      return `${t('common.equivalent_to')} $${formatNumber(xiPrice)} / ${t('common.unit_xi_short')}`;
+    }
+    return null;
+  }, [value, unit, t]);
 
   return (
-    <div className="w-full border border-gray-200 bg-gray-50 px-4 py-4">
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500">{title}</p>
-        <span className="border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600">{t('common.per_unit')}</span>
+    <div className="w-full border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="mb-6">
+        <label className="text-xl font-black uppercase tracking-tight text-black">{title}</label>
+        <p className="text-sm font-bold text-gray-400 uppercase mt-1 tracking-widest">{t('common.per_unit')}</p>
       </div>
-      <div className="space-y-3">
-        <input
-          type="number"
-          inputMode="decimal"
-          value={value}
-          onChange={handleValueChange}
-          placeholder={t('common.amount_placeholder')}
-          className="font-display w-full rounded-none border border-gray-200 bg-white px-4 py-4 text-2xl font-semibold text-gray-900 tracking-[-0.01em] focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900 sm:text-3xl"
-        />
-        <div className="flex gap-2 text-sm font-semibold text-gray-800">
-          {units.map((option) => {
+      
+      <div className="space-y-6">
+        <div className="relative">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-4xl font-black text-black opacity-30">$</span>
+          <input
+            type="number"
+            inputMode="decimal"
+            value={value}
+            onChange={handleValueChange}
+            placeholder="0.00"
+            className="w-full border-4 border-black bg-white py-6 pl-12 pr-6 text-5xl font-black tracking-tighter text-black outline-none transition-colors placeholder:text-gray-200 focus:bg-yellow-50"
+          />
+          {conversionHint && (
+            <div className="mt-4 bg-gray-100 p-3 border-2 border-black font-black text-base text-black">
+              {conversionHint}
+            </div>
+          )}
+        </div>
+
+        <div className="flex border-4 border-black">
+          {units.map((option, idx) => {
             const isActive = unit === option;
             return (
               <button
                 key={option}
                 type="button"
-                className={`flex-1 rounded-none px-3 py-3 transition ${
+                className={`flex-1 py-4 text-sm font-black uppercase transition-colors ${idx !== 0 ? 'border-l-4 border-black' : ''} ${
                   isActive
-                    ? 'border border-gray-900 bg-gray-900 text-white'
-                    : 'border border-gray-300 bg-white text-gray-800 hover:border-gray-400'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black hover:bg-gray-100'
                 }`}
-                onClick={() => handleUnitChange(option)}
+                onClick={() => onUnitChange(option)}
               >
                 {unitLabels[option]}
               </button>

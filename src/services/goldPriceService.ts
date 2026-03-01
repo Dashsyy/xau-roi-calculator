@@ -6,12 +6,36 @@ type GoldPriceResponse = {
   updatedAt: string;
 };
 
-export const fetchLatestGoldPrice = async (): Promise<GoldPriceResponse> => {
-  // TODO: Replace mock with real GET /api/gold/price request when backend is ready.
-  // Future improvement: add hourly polling with an interval-based caller that reuses this function.
-  return Promise.resolve({
-    price: 4400,
+const CACHE_KEY = 'gold_price_cache';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+
+export const fetchLatestGoldPrice = async (forceRefresh = false): Promise<GoldPriceResponse> => {
+  if (!forceRefresh) {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { data, timestamp } = JSON.parse(cached);
+      if (Date.now() - timestamp < CACHE_DURATION) {
+        return data;
+      }
+    }
+  }
+
+  const response = await fetch('https://api.gold-api.com/price/XAU');
+  if (!response.ok) {
+    throw new Error('Failed to fetch gold price');
+  }
+  const data = await response.json();
+  
+  const result: GoldPriceResponse = {
+    price: data.price,
     unit: 'ounce',
-    updatedAt: '2025-01-01T10:00:00Z',
-  });
+    updatedAt: data.updatedAt,
+  };
+
+  localStorage.setItem(CACHE_KEY, JSON.stringify({
+    data: result,
+    timestamp: Date.now(),
+  }));
+
+  return result;
 };
